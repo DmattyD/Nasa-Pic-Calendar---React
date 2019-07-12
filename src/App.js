@@ -36,7 +36,9 @@ class App extends Component {
   }
 
   /// this is the change date function
-  changeDate = dateFromInput => {
+  changeDate = e => {
+    e.preventDefault();
+    let dateFromInput = e.target[0].value
     this.setState({ date: dateFromInput});
     this.getPhoto(dateFromInput);
   };
@@ -48,7 +50,7 @@ class App extends Component {
         <h1>NASA'S Astronomy Picture of the Day</h1>
         <DateInput 
         changeDate={this.changeDate}
-        date={this.state.date}/>
+        />
         <Photo 
         photo={this.state.photo}/>
       </div>
