@@ -9,6 +9,14 @@ class App extends Component {
     photo: "",
   };
 
+  /// sets state of the photo to the selected date inputed into the form
+  getPhoto = date => {
+    fetch(`
+    https://api.nasa.gov/planetary/apod?date=${date}&api_key=58oXjtN6gnphNMkCExZ8VSyl6effQwda2CppFiYV`)
+    .then(response => response.json())
+    .then(photoData => this.setState({ photo: photoData }));
+  };
+
   ////this is the API fetch
   componentDidMount() {
     fetch (`
@@ -23,8 +31,8 @@ class App extends Component {
     console.log(e.target);
 
     let dateFromInput = e.target[0].value;
-
     this.setState({ date: dateFromInput});
+    this.getPhoto(dateFromInput);
   };
   render () {
     return (
