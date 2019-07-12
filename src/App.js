@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import DateInput from "./components/DateInput";
 import Photo from "./components/Photo";
 
 class App extends Component {
 
     state = {
-    date: "",
+    date:'',
     photo: "",
   };
+
+  
+  /// Not sure why moment isn't working
+  // formatDate = moment => {
+  //   let year = moment.year();
+  //   let month = moment.month() + 1;
+  //   let day = moment.day();
+  //   return `${year}-${month}-${day}`;
+  // }
 
   /// sets state of the photo to the selected date inputed into the form
   getPhoto = date => {
@@ -26,20 +36,19 @@ class App extends Component {
   }
 
   /// this is the change date function
-  changeDate = e => {
-    e.preventDefault();
-    console.log(e.target);
-
-    let dateFromInput = e.target[0].value;
+  changeDate = dateFromInput => {
     this.setState({ date: dateFromInput});
     this.getPhoto(dateFromInput);
   };
+
+
   render () {
     return (
       <div>
         <h1>NASA'S Astronomy Picture of the Day</h1>
         <DateInput 
-        changeDate={this.changeDate}/>
+        changeDate={this.changeDate}
+        date={this.state.date}/>
         <Photo 
         photo={this.state.photo}/>
       </div>
